@@ -1,9 +1,9 @@
 //https://iwb.jp/easy-javascript-countdown-timer/
 var inte = 2000;
+var stopped = false;
 function timer() {
-    var stopped = false;
-
     // var DAYSTART = new Date('2019/01/09 00:00:00'); //設定可能
+    stopped = false;
     var DAYSTART =　Date.now();
     const end = document.getElementById('time').value;
     var today = new Date();
