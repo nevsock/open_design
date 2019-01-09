@@ -26,7 +26,7 @@ function timer() {
             inte = calc / c * 2000;
         }
     }
-    setInterval(function() { 
+    var id = setInterval(function() { 
         countdownTimer(); 
         if(stopped == true){
             clearInterval(id);
