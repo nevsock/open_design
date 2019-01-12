@@ -1,8 +1,8 @@
 //https://iwb.jp/easy-javascript-countdown-timer/
 var inte = 2000;
 var stopped = false;
+
 function timer() {
-    // var DAYSTART = new Date('2019/01/09 00:00:00'); //設定可能
     stopped = false;
     var DAYSTART =　Date.now();
     const end = document.getElementById('time').value;
@@ -10,7 +10,6 @@ function timer() {
     var DAYEND = new Date(`${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()} ${end}`);
     var INTERVAL = 1000;
     var calc = new Date(+DAYEND - DAYSTART + INTERVAL);
-    const c = calc;
     mainFunction();
     function countdownTimer() {
         var addZero = function(n) { return ('0' + n).slice(-2); }
@@ -23,7 +22,13 @@ function timer() {
             var minutes = addZero(calc.getUTCMinutes()) ;
             var seconds = addZero(calc.getUTCSeconds()) ;
             document.getElementById('result').innerHTML = date + '日' + hours + '時間' + minutes + '分' + seconds + '秒';
-            inte = calc / c * 2000;
+        }
+        if (Number(hours) == 0 && Number(minutes) == 30 && Number(seconds) == 0){
+            inte = 1000;
+        } else if(Number(hours) == 0 && Number(minutes) == 10 && Number(seconds) == 0){
+            inte = 500;
+        } else if(Number(hours) == 0 && Number(minutes) == 3 && Number(seconds) == 0){
+            inte = 200;
         }
     }
     var id = setInterval(function() { 
