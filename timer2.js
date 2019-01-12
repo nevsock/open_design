@@ -23,11 +23,13 @@ function timer() {
             var seconds = addZero(calc.getUTCSeconds()) ;
             document.getElementById('result').innerHTML = date + '日' + hours + '時間' + minutes + '分' + seconds + '秒';
         }
-        if (Number(hours) == 0 && Number(minutes) == 30 && Number(seconds) == 0){
+        if (Number(hours) == 0 && Number(minutes) <= 30) {
             inte = 1000;
-        } else if(Number(hours) == 0 && Number(minutes) == 10 && Number(seconds) == 0){
+        }
+        if(Number(hours) == 0 && Number(minutes) <= 10) {
             inte = 500;
-        } else if(Number(hours) == 0 && Number(minutes) == 3 && Number(seconds) == 0){
+        }
+        if(Number(hours) == 0 && Number(minutes) <= 3) {
             inte = 200;
         }
     }
@@ -59,4 +61,28 @@ function sleep(ms) {
     return new Promise(function(resolve) {
       setTimeout(resolve, ms);
     });
+}
+
+var ax = document.querySelector('#ax');
+var ay = document.querySelector('#ay');
+var az = document.querySelector('#az');
+
+onload=function(){
+  acceler();
+}
+
+async function acceler(){
+  // WebI2C Initialized
+  var i2cAccess = await navigator.requestI2CAccess()
+  var port = i2cAccess.ports.get(1);
+  var groveaccelerometer = new GROVEACCELEROMETER(port,0x53);
+  await groveaccelerometer.init();
+  
+  while(true){
+    var values = await groveaccelerometer.read();
+    ax.innerHTML = values.x ? values.x : ax.innerHTML;
+    ay.innerHTML = values.y ? values.y : ay.innerHTML;
+    az.innerHTML = values.z ? values.z : az.innerHTML;
+    await sleep(500);
+  }
 }

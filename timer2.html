@@ -6,6 +6,7 @@
   </head>
   <script type="text/javascript" src="timer2.js"></script>
   <script src="https://chirimen.org/chirimen-raspi3/gc/polyfill/polyfill.js"></script>
+  <script src="https://chirimen.org/chirimen-raspi3/gc/drivers/i2c-grove-accelerometer.js"></script>
   <body>
     <label for="time">
         Choose an appointment time:
@@ -16,5 +17,8 @@
     	Loading...
     </p>
     <button onclick='stop();'>STOP</button>
+    <p id="ax">ax</p>
+    <p id="ay">ay</p>
+    <p id="az">az</p>
   </body>
 </html>
